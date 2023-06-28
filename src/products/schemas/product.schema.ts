@@ -12,16 +12,16 @@ export class Product {
   description: string;
 
   @Prop()
-  published: string;
+  published: boolean;
 
   @Prop()
   image: string;
 
   @Prop()
-  Price: string;
+  price: number;
 
   @Prop()
-  rating: string;
+  rating: number;
 }
 
 export const ProductSchem = SchemaFactory.createForClass(Product);
