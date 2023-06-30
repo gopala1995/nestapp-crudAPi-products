@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString, IsBoolean,IsNumber } from "class-validator";
+import { IsNotEmpty, IsString, IsBoolean,IsNumber, IsEmpty } from "class-validator";
+import { User } from "../../auth/schemas/user.schema";
 
 export class createProductDto {
 
@@ -25,4 +26,7 @@ export class createProductDto {
   @IsNotEmpty()
   @IsNumber()
   readonly rating: number;
+  
+  @IsEmpty()
+  readonly user:User
 }

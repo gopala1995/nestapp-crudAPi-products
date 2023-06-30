@@ -7,12 +7,15 @@ import {
   Put,
   Delete,
   Query,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Product } from './schemas/product.schema';
 import { createProductDto } from './dto/create-product.dto';
-import { updateProductDto } from './dto/update-book.dto';
+import { updateProductDto } from './dto/update-product.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('products')
 export class ProductsController {
@@ -24,11 +27,15 @@ export class ProductsController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
   async createProduct(
     @Body()
     product: createProductDto,
+    @Req() req
   ): Promise<Product> {
-    return this.productService.createProduct(product);
+    console.log(req.user);
+    
+    return this.productService.createProduct(product,req.user);
   }
 
   @Get(':id')

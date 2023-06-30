@@ -1,4 +1,11 @@
-import { IsOptional, IsString, IsBoolean, IsNumber } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsBoolean,
+  IsNumber,
+  IsEmpty,
+} from 'class-validator';
+import { User } from '../../auth/schemas/user.schema';
 
 export class updateProductDto {
   @IsOptional()
@@ -24,4 +31,7 @@ export class updateProductDto {
   @IsOptional()
   @IsNumber()
   readonly rating: number;
+
+  @IsEmpty()
+  readonly user: User;
 }
