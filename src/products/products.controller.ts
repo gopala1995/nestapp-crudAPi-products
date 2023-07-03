@@ -26,6 +26,11 @@ export class ProductsController {
     return this.productService.findAll(query);
   }
 
+  @Get("/published")
+  async getPublishedProduct(publish:boolean): Promise<Product[]> {
+    return this.productService.getAllPublished(publish);
+  }
+
   @Post()
   @UseGuards(AuthGuard())
   async createProduct(
@@ -33,7 +38,7 @@ export class ProductsController {
     product: createProductDto,
     @Req() req
   ): Promise<Product> {
-    console.log(req.user);
+    // console.log(req.user);
     
     return this.productService.createProduct(product,req.user);
   }

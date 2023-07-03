@@ -67,8 +67,10 @@ export class ProductsService {
   //   return await this.productModel.deleteMany(product);
   // }
 
-  // async findByPublished(pub:boolean):Promise<Product[]>{
-  //     const publis = await this.productModel.find()
-  //     return publis
-  // }
+  async getAllPublished(published: boolean): Promise<Product[]> {
+    const publish = await this.productModel.aggregate([
+      { $match: { published: true } },
+    ]);
+    return publish;
+  }
 }
