@@ -12,11 +12,6 @@ export class ProductsService {
     private productModel: mongoose.Model<Product>,
   ) {}
 
-  // async getAllProducts(): Promise<Product[]> {
-  //   const product = await this.productModel.find();
-  //   return product;
-  // }
-
   async findAll(query: Query): Promise<Product[]> {
     const rePerPage = 2;
     const currentPage = Number(query.page) || 1;
@@ -35,6 +30,13 @@ export class ProductsService {
       .limit(rePerPage)
       .skip(skip);
     return product;
+  }
+
+  async getAllPublished(published: boolean): Promise<Product[]> {
+    const publish = await this.productModel.aggregate([
+      { $match: { published: true } },
+    ]);
+    return publish;
   }
 
   async createProduct(product: Product, user: User): Promise<Product> {
@@ -61,16 +63,5 @@ export class ProductsService {
 
   async deleteById(id: string): Promise<Product> {
     return await this.productModel.findByIdAndDelete(id);
-  }
-
-  // async deleteAll(product: Product): Promise<Product> {
-  //   return await this.productModel.deleteMany(product);
-  // }
-
-  async getAllPublished(published: boolean): Promise<Product[]> {
-    const publish = await this.productModel.aggregate([
-      { $match: { published: true } },
-    ]);
-    return publish;
   }
 }

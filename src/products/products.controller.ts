@@ -26,8 +26,8 @@ export class ProductsController {
     return this.productService.findAll(query);
   }
 
-  @Get("/published")
-  async getPublishedProduct(publish:boolean): Promise<Product[]> {
+  @Get('/published')
+  async getPublishedProduct(publish: boolean): Promise<Product[]> {
     return this.productService.getAllPublished(publish);
   }
 
@@ -36,11 +36,11 @@ export class ProductsController {
   async createProduct(
     @Body()
     product: createProductDto,
-    @Req() req
+    @Req() req,
   ): Promise<Product> {
     // console.log(req.user);
-    
-    return this.productService.createProduct(product,req.user);
+
+    return this.productService.createProduct(product, req.user);
   }
 
   @Get(':id')
