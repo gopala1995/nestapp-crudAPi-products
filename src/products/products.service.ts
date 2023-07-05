@@ -25,9 +25,11 @@ export class ProductsService {
           },
         }
       : {};
+
     const product = await this.productModel
       .find({ ...keyword })
-      .limit(rePerPage)
+      // .sort({ price: "desc", rating: 1 })
+      // .limit(rePerPage)
       .skip(skip);
     return product;
   }
