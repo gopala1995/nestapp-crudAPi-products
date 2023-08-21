@@ -27,11 +27,11 @@ export class AuthService {
     });
 
     const token = this.jwtService.sign({ id: user._id });
-
+  
     return { token };
   }
 
-  async Login(loginDto: logInDto): Promise<{ token: string }> {
+  async Login(loginDto: logInDto): Promise<any> {
     const { email, password } = loginDto;
 
     const user = await this.useModel.findOne({ email });
@@ -44,9 +44,12 @@ export class AuthService {
     if (!isPassword) {
       throw new UnauthorizedException('Invalid email or password');
     }
+     
+    if(user && isPassword) {
+       return user
+    }
+    // const token = this.jwtService.sign({ id: user._id });
 
-    const token = this.jwtService.sign({ id: user._id });
-
-    return { token };
+    // return { token };
   }
 }

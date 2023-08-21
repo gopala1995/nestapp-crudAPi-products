@@ -32,6 +32,6 @@ export class updateProductDto {
   @IsNumber()
   readonly rating: number;
 
-  @IsEmpty()
+  @IsOptional()
   readonly user: User;
 }

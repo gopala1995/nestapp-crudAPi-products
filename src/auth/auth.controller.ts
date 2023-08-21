@@ -15,5 +15,6 @@ export class AuthController {
   @Post('/login')
   logIn(@Body() logInDto: logInDto): Promise<{ token: string }> {
     return this.authService.Login(logInDto);
+    
   }
 }

@@ -24,6 +24,7 @@ export class ProductsService {
             $options: 'i',
           },
         }
+
       : {};
 
     const product = await this.productModel
